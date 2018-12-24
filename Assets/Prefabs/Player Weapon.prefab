@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 1708375406124553346}
   - component: {fileID: 7568976816067970163}
   - component: {fileID: 895955911940640423}
+  - component: {fileID: 8538622497204277199}
   - component: {fileID: 8528802333420610613}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,6 +103,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 2
+--- !u!114 &8538622497204277199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7497652000672701979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f6ad23ce7116949a0335247b4d0a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 100
+  shootFX: {fileID: 8300000, guid: 58b1f900a827ea2478b1cdbc23501aad, type: 3}
+  shootSoundVolume: 0.2
 --- !u!70 &8528802333420610613
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -112,7 +128,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
