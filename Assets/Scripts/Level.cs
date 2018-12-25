@@ -6,16 +6,26 @@ using UnityEngine.SceneManagement;
 public class Level : MonoBehaviour
 {
     [SerializeField] float delay = 5f;
+
     public void LoadStartMenu()
     {
+        FindObjectOfType<GameSession>().ResetGame();
         SceneManager.LoadScene(0);
     }
 
     public void LoadGameScene()
     {
-        if(FindObjectOfType<MusicPlayer>() != null)
+       try
+       {
+        FindObjectOfType<GameSession>().ResetGame();
+       }
+       catch {}
+       try
+       {
             FindObjectOfType<MusicPlayer>().Destroy();
-        SceneManager.LoadScene("Level");
+       }
+       catch{}
+       SceneManager.LoadScene("Level");
     }
 
     public void LoadGameOverScene()
@@ -29,6 +39,7 @@ public class Level : MonoBehaviour
         yield return new WaitForSeconds(delay); //wait 3 seconds before loading game over screen
         FindObjectOfType<MusicPlayer>().Destroy();
         SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);
+    
     }
 
     public void QuitGame()

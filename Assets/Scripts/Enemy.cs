@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float minTimeBetweenShots = .2f;
     [SerializeField] float maxTimeBetweenShots = 3f;
     [SerializeField] float projectileSpeed = 10f;
+    [SerializeField] int scoreOnKill = 50;
 
     [Header("Enemy Components")]
     
@@ -19,11 +20,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject DestroyVFX;
     [SerializeField] GameObject onHitVFX;
 
+    //cache reerences
+    GameSession gameSession;
+
      float shotCounter;
     float timeSinceLastShot = 0;
     
     void Start()
     {
+        gameSession = FindObjectOfType<GameSession>();
         shotCounter = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
     }
 
@@ -50,6 +55,7 @@ public class Enemy : MonoBehaviour
         
         //play audio fx for that specific weapon type
         DamageDealer damageDealer = Enemylaser.GetComponent<DamageDealer>();
+        
         AudioSource.PlayClipAtPoint(damageDealer.getShootFX(), Camera.main.transform.position, 
         damageDealer.getShootVolume());
     
@@ -60,7 +66,6 @@ public class Enemy : MonoBehaviour
         DamageDealer damageDealer = other.gameObject.GetComponent<DamageDealer>();
         if(damageDealer != null)
             ProcessHit(damageDealer);
-    
     }
 
     private void ProcessHit(DamageDealer damageDealer)
@@ -81,6 +86,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        gameSession.addToScore(scoreOnKill);
         AudioSource.PlayClipAtPoint(deathSound, Camera.main.transform.position, deathVolume);
         Destroy(gameObject);
         GameObject effect = Instantiate(DestroyVFX, transform.position, Quaternion.identity) as GameObject;

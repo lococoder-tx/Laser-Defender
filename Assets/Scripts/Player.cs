@@ -135,17 +135,19 @@ public class Player : MonoBehaviour
         Destroy(effect,5f);
     }
 
-    public float getHealth()
+    public float GetHealth()
     {
-        return health;
+        if(health < 0)
+            return 0;
+        else return health;
     }
 
-    public float getMaxHealth()
+    public float GetMaxHealth()
     {
         return maxHealth;
     }
 
-    public void setHealth(float amount)
+    public void SetHealth(float amount)
     {
         health = amount;
     }
